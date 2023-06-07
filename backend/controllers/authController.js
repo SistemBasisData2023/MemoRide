@@ -1,0 +1,110 @@
+import { pool } from "../index.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
+// register user
+export const register = async (req, res) => {
+  try {
+    const { username, email, password, photo, role } = req.body;
+
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
+
+    const newUser = {
+      username: username,
+      email: email,
+      password: hash,
+      photo: photo,
+    };
+
+    const query = {
+      text: "INSERT INTO users (username, email, password, photo, role) VALUES ($1, $2, $3, $4, $5)",
+      values: [
+        newUser.username,
+        newUser.email,
+        newUser.password,
+        newUser.photo,
+        newUser.role,
+      ],
+    };
+
+    await pool.query(query);
+
+    res
+      .status(200)
+      .json({ success: true, message: "Successfully created an account" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: "Failed to create an account. Try again",
+    });
+  }
+};
+
+// login user
+export const login = async (req, res) => {
+
+  const email = req.body.email;
+  const password = req.body.password;
+
+  try {
+    // Find user
+    const query = {
+      text: "SELECT * FROM users WHERE email = $1",
+      values: [email],
+    };
+    const result = await pool.query(query);
+    const user = result.rows[0];
+
+    // if user doesn't have an account
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User Not Found",
+      });
+    }
+
+    // Compare the passwords (hash the provided password and compare with the stored hashed password)
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+    // if password is incorrect
+    if (!isPasswordMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Incorrect Email or Password",
+      });
+    }
+
+    const { password: _, ...rest } = user;
+
+    // create jwt token
+    const token = jwt.sign(
+      { id: user.id, role: user.role },
+      process.env.JWT_SECRET_KEY,
+      {
+        expiresIn: "15d",
+      }
+    );
+
+    // set token in the browser cookies and send the response to the client
+    res
+      .cookie("accessToken", token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000), // 15 days
+      })
+      .status(200)
+      .json({
+        token,
+        data: { ...rest },
+        role: user.role,
+      });
+  } catch (error) {
+    console.error(error); // Log the error for debugging purposes
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to Login",
+    });
+  }
+};

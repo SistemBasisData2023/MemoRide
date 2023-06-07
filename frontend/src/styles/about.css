@@ -1,0 +1,36 @@
+.about-container {
+  display: flex;
+  align-items: center;
+}
+
+.about-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #fa7436;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+.about-content {
+  margin-left: 20px;
+}
+
+.about-content h2 {
+  font-size: 2rem;
+  color: var(--heading-color);
+  margin-bottom: 1rem;
+}
+
+.about-content p {
+  color: var(--text-color);
+  font-size: 1.1rem;
+}

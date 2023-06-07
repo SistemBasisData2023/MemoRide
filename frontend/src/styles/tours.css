@@ -1,0 +1,33 @@
+.pagination span{
+    width: 2rem;
+    height: 2rem;
+    padding: 5px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--primary-color);
+    color: var(--heading-color);
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.active_page{
+    background: var(--primary-color);
+    color: #fff !important;
+}
+
+.searchTour{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content; 
+}
+
+.search_section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -50px;
+}
