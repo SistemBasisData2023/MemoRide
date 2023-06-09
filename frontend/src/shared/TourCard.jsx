@@ -1,20 +1,41 @@
-import React from 'react';
-import { Card, CardBody } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import calculateAvgRating from '../utils/avgRating';
+import React, { useEffect, useState } from "react";
+import { Card, CardBody } from "reactstrap";
+import { Link } from "react-router-dom";
+import calculateAvgRating from "../utils/avgRating";
+import { BASE_URL } from "./../utils/config";
 
-import './tour-card.css';
+import "./tour-card.css";
 
 const TourCard = ({ tour }) => {
-  const { id, title, city, photo, price, featured, reviews } = tour;
+  const { id, title, city, photo, price, featured } = tour;
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/reviews/${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setReviews(data.data);
+        } else {
+          throw new Error("Failed to fetch reviews");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchReviews();
+  }, [id]);
 
   const { totalRating, avgRating } = calculateAvgRating(reviews);
+  const ratingText = avgRating === 0 ? "Not rated" : avgRating.toFixed(1);
 
   return (
     <div className="tour_card">
       <Card>
         <div className="tour_img">
-          <img className="tour_img__image" src={photo} alt="tour-img" />
+          <img className="tour_img__image" src="https://picsum.photos/id/29/200/300" alt="tour-img" />
           {featured && <span>Featured</span>}
         </div>
 
@@ -25,12 +46,8 @@ const TourCard = ({ tour }) => {
             </span>
             <span className="tour_rating d-flex align-items-center gap-1">
               <i className="ri-star-line"></i>{" "}
-              {avgRating === 0 ? null : avgRating}
-              {reviews && reviews.length === 0 ? (
-                "Not rated"
-              ) : (
-                <span>({reviews && reviews.length})</span>
-              )}
+              {ratingText}
+              {reviews.length === 0 ? null : <span>({reviews.length})</span>}
             </span>
           </div>
 

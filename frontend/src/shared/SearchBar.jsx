@@ -15,13 +15,14 @@ const SearchBar = () => {
     const location = locationRef.current.value;
     const distance = distanceRef.current.value;
     const maxGroup = maxGroupSizeRef.current.value;
-    
+
     if (location === "" || distance === "" || maxGroup === "") {
       return alert("All fields are required!");
     }
 
-    const res = await fetch(`${BASE_URL}/tours/search/getTourBySearch?city=
-        ${location}&distance=${distance}&maxGroupSize=${maxGroup}`);
+    const res = await fetch(
+      `${BASE_URL}/tours/search/getTourBySearch?city=${location}&distance=${distance}&maxGroupSize=${maxGroup}`
+    );
 
     if (!res.ok) alert("Something went wrong");
 

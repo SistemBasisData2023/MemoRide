@@ -7,6 +7,13 @@ export const register = async (req, res) => {
   try {
     const { username, email, password, photo, role } = req.body;
 
+    if (!password || password.trim() === "") {
+      return res.status(400).json({
+        success: false,
+        message: "Password is required",
+      });
+    }
+    
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
@@ -15,6 +22,7 @@ export const register = async (req, res) => {
       email: email,
       password: hash,
       photo: photo,
+      role: 'user',
     };
 
     const query = {

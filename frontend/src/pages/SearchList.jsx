@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CommonSection from "./../shared/CommonSection";
 import { Container, Row, Col } from "reactstrap";
 import { useLocation } from "react-router-dom";
 import TourCard from "../shared/TourCard";
+import Newsletter from "./../shared/Newsletter"
 
 const SearchList = () => {
   const location = useLocation();
-  const [data] = useState(location.state);
+  const [data, setData] = useState(location.state);
+
+  useEffect(() => {
+    setData(location.state);
+  }, [location.state]);
 
   return (
     <>
@@ -26,6 +31,7 @@ const SearchList = () => {
           </Row>
         </Container>
       </section>
+      <Newsletter/>
     </>
   );
 };

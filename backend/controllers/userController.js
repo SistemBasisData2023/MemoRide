@@ -6,6 +6,13 @@ export const createUser = async (req, res) => {
   const { username, email, password, photo, role } = req.body;
 
   try {
+    if (!password || password.trim() === "") {
+      return res.status(400).json({
+        success: false,
+        message: "Password is required",
+      });
+    }
+    
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 

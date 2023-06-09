@@ -47,3 +47,14 @@
     box-shadow: 3px 3px 8px -3px #ddd;
     z-index: 999;
 }
+
+.user_show i{
+    color: var(--primary-color);
+    font-size: 2rem;
+}
+
+.username_show h5{
+    color: var(--heading-color);
+    font-size: 2rem;
+    padding: 1rem;
+}
