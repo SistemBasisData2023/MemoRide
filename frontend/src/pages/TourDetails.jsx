@@ -6,9 +6,12 @@ import calculateAvgRating from "../utils/avgRating";
 import avatar from "../assets/images/ava1.png";
 import Booking from "../components/Booking/Booking";
 import Newsletter from "../shared/Newsletter";
+import axios from "axios";
 import useFetch from "./../hooks/useFetch";
 import { BASE_URL } from "./../utils/config";
 import { AuthContext } from "./../context/AuthContext";
+import { getToken } from "../context/AuthController";
+import Cookies from "js-cookie";
 
 const TourDetails = () => {
   const { id } = useParams();
@@ -29,7 +32,7 @@ const TourDetails = () => {
     address,
     city,
     distance,
-    maxGroupSize,
+    max_group_size,
   } = tour;
 
   const { totalRating, avgRating } = reviews
@@ -51,19 +54,26 @@ const TourDetails = () => {
     }
 
     try {
-      const response = await fetch(`${BASE_URL}/reviews/${id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const token = getToken(); // Retrieve the token from localStorage
+      console.log(token)
+
+      const response = await axios.post(`${BASE_URL}/reviews/${id}`,
+        {
           reviewText,
           rating: tourRating,
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
+          username: user.username,
+          role: 'user',
+        },
+        {
+          withCredentials: true, // Include this option to send cookies
+          headers: {
+            Authorization: `Bearer ${Cookies.get('accessToken')}`, // Include the token in the Authorization header
+          },
+        }
+      );
+  
+      if (response.status === 200) {
+        const data = response.data;
         setReviews([...reviews, data.data]);
       } else {
         throw new Error("Failed to submit review");
@@ -145,7 +155,7 @@ const TourDetails = () => {
                       </span>
                       <span>
                         <i className="ri-group-line"></i>
-                        {maxGroupSize} people
+                        {max_group_size} people
                       </span>
                     </div>
                     <h5>Description</h5>

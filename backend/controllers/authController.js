@@ -91,7 +91,7 @@ export const login = async (req, res) => {
       { id: user.id, role: user.role },
       process.env.JWT_SECRET_KEY,
       {
-        expiresIn: "15d",
+        expiresIn: "150d",
       }
     );
 
@@ -99,7 +99,7 @@ export const login = async (req, res) => {
     res
       .cookie("accessToken", token, {
         httpOnly: true,
-        expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000), // 15 days
+        expires: new Date(Date.now() + 150 * 24 * 60 * 60 * 1000), // 150 days
       })
       .status(200)
       .json({
