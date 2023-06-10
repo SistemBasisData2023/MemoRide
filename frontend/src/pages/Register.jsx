@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, FormGroup, Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../context/AuthController";
 import registerImg from "../assets/images/register.svg";
-import "../styles/register.css"
+import "../styles/login.css"
 import { AuthContext } from "../context/AuthContext";
 
 const Register = () => {

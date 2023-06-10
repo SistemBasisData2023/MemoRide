@@ -5,6 +5,7 @@
     background-position: center;
     padding-top: 50px;
     padding-bottom: 80px;
+    overflow: hidden;
 }
 
 .home::before{
@@ -173,4 +174,26 @@
     font-size: 12px;
     color: #999;
 }
+
+@media screen and (max-width: 992px){
+    .home h1{
+        font-size: 2.5rem;
+    }
+
+    .services_title,
+    .featured_tour-title,
+    .testimonial_title,
+    .experience_content h2{
+        font-size: 2rem;
+    }
+
+    .experience_img{
+        margin-top: 2rem;
+    }
+}
   
+@media screen and (max-width: 576px){
+    .home h1{
+        font-size: 1.8rem;
+    }
+}

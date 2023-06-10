@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useRef, useEffect, useContext, useState } from "react";
 import { Container, Row, Button } from "reactstrap";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -27,7 +27,7 @@ const nav_links = [
 
 const Header = () => {
   const headerRef = useRef(null);
-  const { user, handleLogin, handleLogout } = useContext(AuthContext);
+  const { user, handleLogout } = useContext(AuthContext);
   console.log(user);
 
   const stickyHeaderFunc = () => {
@@ -82,11 +82,14 @@ const Header = () => {
           </div>
           {/* Menu End */}
 
-          <div className="nav_right d-flex align-items-center gap-4">
+          <div className="buttons nav_right d-flex align-items-center gap-4">
             {user !== null ? (
               <div className="nav_btn d-flex align-items-center gap-4">
                 <div className="user_show">
                   <i className="ri-user-smile-fill"></i>
+                </div>
+                <div className="username_show">
+                  <h5>{user.username}</h5>
                 </div>
                 <Button className="btn btn-dark" onClick={handleLogout}>
                   Logout
@@ -103,9 +106,6 @@ const Header = () => {
               </div>
             )}
 
-            <span className="menu">
-              <i className="ri-menu-line"></i>
-            </span>
           </div>
         </div>
       </Row>

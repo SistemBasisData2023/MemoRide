@@ -98,3 +98,17 @@ color: inherit;
   color: var(--heading-color);
   font-style: italic;
 }
+
+@media screen and (max-width: 992px){
+  .primary_btn a, .secondary_btn a{
+    font-size: 0.9rem;
+  }
+
+  .primary_btn, .secondary_btn, .btn-dark{
+    padding: 0.2rem 1.1rem !important;
+  }
+
+  section{
+    padding: 40px 0;
+  }
+}

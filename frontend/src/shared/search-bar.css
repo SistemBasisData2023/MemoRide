@@ -63,3 +63,36 @@
 .search_icon i:hover{
     background-color: #fa7426;
 }
+
+@media screen and (max-width: 992px){
+    .search_bar{
+        width: 100%;
+        border-radius: 2rem;
+    }
+
+    .search_bar form{
+        flex-wrap: wrap;
+    }
+
+    .search_bar form .form_group{
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 576px){
+    .search_bar from .form_group{
+        width: 100%;
+    }
+    
+    .form_group input{
+        font-size: 0.7rem;
+    }
+
+    .form_group span i{
+        font-size: 1.1rem;
+    }
+
+    .form_group h6{
+        font-size: 1rem;
+    }
+}
