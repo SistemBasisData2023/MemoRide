@@ -1,4 +1,4 @@
-# MemoRide-SBD
+# MemoRide : A Cultural Journey
 
 <p align ="center">
   <a href="#authors">Authors</a> •
