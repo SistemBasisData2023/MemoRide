@@ -7,6 +7,7 @@
   <a href="#tables">Tables</a> •
   <a href="#flowchart">Flowchart</a> •
   <a href="#ERD-and-UML">ERD and UML</a> 
+  <a href="#Presentation"></a>
 </p>
 
 ---
@@ -24,10 +25,13 @@
 <p align="justify">Additionally, the application also includes users with admin roles, who have the ability to perform CRUD operations (Create, Read, Update, Delete) on the available tourist destinations. With this feature, admins can easily manage information and details of the tourist destinations and the users.</p>
 
 <p align="justify">Key features of MemoRide:</p>
+```
 🏛️ Extensive selection of cultural tourist destinations
 🌟 Ratings and reviews from fellow travelers
 📝 Booking history and travel tracking
 📋 Admin privileges for managing destinations and users
+```
+
 ---
 
 ## Language and Tools
@@ -117,11 +121,11 @@
 
   ```MemoRide User Flowchart ```
 
-![alt text](https://github.com/birujung/MemoRide-SBD/blob/tunjung/User_Flowchart.png)
+![alt text](https://github.com/SistemBasisData2023/MemoRide/blob/main/misc/User_Flowchart.png)
 
 ```Memoride Admin Flowchart```
 
-![alt text](https://github.com/birujung/MemoRide-SBD/blob/tunjung/Admin_Flowchart.png)
+![alt text](https://github.com/SistemBasisData2023/MemoRide/blob/main/misc/Admin_Flowchart.png)
 
 </details>
 
@@ -133,12 +137,19 @@
 
   ```Entity Relational Diagram (ERD)```
 
-![alt text](https://github.com/birujung/MemoRide-SBD/blob/tunjung/ERD_MemoRide.png)
+![alt text](https://github.com/SistemBasisData2023/MemoRide/blob/main/misc/ERD_MemoRide.png)
 
 ```Unified Modeling Language (UML)```
 
-![alt text](https://github.com/birujung/MemoRide-SBD/blob/tunjung/UML_MemoRide.png)
+![alt text](https://github.com/SistemBasisData2023/MemoRide/blob/main/misc/UML_MemoRide.png)
 
 </details>
 
 ---
+
+## Presentation
+<details>
+  <summary>View Presentation</summary>
+
+  ```Presentation```
+  ![alt text](https://github.com/SistemBasisData2023/MemoRide/blob/main/misc/MemoRide_Presentation.pdf)
