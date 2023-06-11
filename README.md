@@ -25,12 +25,10 @@
 <p align="justify">Additionally, the application also includes users with admin roles, who have the ability to perform CRUD operations (Create, Read, Update, Delete) on the available tourist destinations. With this feature, admins can easily manage information and details of the tourist destinations and the users.</p>
 
 <p align="justify">Key features of MemoRide:</p>
-```
-🏛️ Extensive selection of cultural tourist destinations
-🌟 Ratings and reviews from fellow travelers
-📝 Booking history and travel tracking
-📋 Admin privileges for managing destinations and users
-```
+- 🏛️ Extensive selection of cultural tourist destinations
+- 🌟 Ratings and reviews from fellow travelers
+- 📝 Booking history and travel tracking
+- 📋 Admin privileges for managing destinations and users
 
 ---
 
