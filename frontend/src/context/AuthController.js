@@ -1,13 +1,13 @@
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import { BASE_URL } from '../utils/config';
+import axios from "axios";
+import Cookies from "js-cookie";
+import { BASE_URL } from "../utils/config";
 
 // Action types
-export const LOGIN_START = 'LOGIN_START';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
-export const LOGOUT = 'LOGOUT';
+export const LOGIN_START = "LOGIN_START";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const LOGOUT = "LOGOUT";
 
 // Login action
 export const login = (setUser, loginData) => {
@@ -17,11 +17,17 @@ export const login = (setUser, loginData) => {
       // Handle successful login
       console.log(response.data);
       const token = response.data.token; // Access the token property from the response
-      const userData = response.data.data; // Access user data from the response
+      const { username, role, email, id } = response.data.data; // Access user data from the response
+      const userData = {
+        username,
+        role,
+        email,
+        id,
+      };
       setUser(userData);
 
       // Save the token as a cookie named 'accessToken'
-      Cookies.set('accessToken', token, { expires: 150 });
+      Cookies.set("accessToken", token, { expires: 150 });
 
       return userData;
     })
@@ -33,7 +39,7 @@ export const login = (setUser, loginData) => {
 
 // Get token when Login
 export const getToken = () => {
-  const token = localStorage.getItem('token');
+  const token = Cookies.get("accessToken");
   return token;
 };
 

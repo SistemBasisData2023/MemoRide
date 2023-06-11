@@ -22,7 +22,8 @@
 }
 
 .nav_item a:hover {
-  color: inherit;
+  color: var(--background-color-2);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .nav_item a.active_link {
@@ -48,11 +49,30 @@
   z-index: 999;
 }
 
-.buttons{
+.buttons {
   margin-right: 2rem;
 }
 
-.user_show{
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.link:hover {
+  color: var(--secondary-color);
+}
+
+.btn.primary_btn:hover {
+  background-color: var(--background-color-2) !important;
+  color: white !important;
+}
+
+.btn.secondary_btn:hover {
+  color: var(--background-color-2);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.user_show {
   margin-top: 0.3rem;
 }
 
@@ -61,7 +81,7 @@
   font-size: 2rem;
 }
 
-.username_show{
+.username_show {
   margin-top: 0.4rem;
   margin-left: -1rem;
   margin-right: 0.5rem;
@@ -74,6 +94,11 @@
   align-items: center;
 }
 
+.user_show i:hover,
+.username_show h5:hover {
+  color: var(--background-color-2);
+}
+
 @media screen and (max-width: 992px) {
   .Logo img {
     width: 70%;
@@ -81,7 +106,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .Logo img{
-        width: 50%;
-    }
+  .Logo img {
+    width: 50%;
+  }
 }

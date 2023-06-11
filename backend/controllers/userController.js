@@ -12,7 +12,7 @@ export const createUser = async (req, res) => {
         message: "Password is required",
       });
     }
-    
+
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 

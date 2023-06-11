@@ -1,0 +1,70 @@
+.details {
+  margin-bottom: 3rem;
+}
+
+.details h1 {
+  font-size: 50px;
+}
+
+.details h1 span {
+  color: var(--secondary-color);
+  font-style: italic;
+  font-family: "blured";
+  font-size: 65px;
+}
+
+.details h5 {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.details h5 span {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-right: 10rem;
+  min-width: 100px;
+}
+
+.gender-switch {
+  display: flex;
+  align-items: center;
+}
+
+.gender-switch span {
+  color: var(--primary-color);
+  margin-right: 5rem;
+  font-weight: 600;
+}
+
+.gender-option {
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  font-weight: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.gender-option.selected {
+  opacity: 1;
+  color: var(--secondary-color);
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.gender-option:not(.selected) {
+  opacity: 0.5;
+  filter: blur(3px);
+}
+
+.avatar {
+  margin-left: 10rem;
+}
+
+.avatar img {
+  width: auto;
+  height: 15rem;
+}

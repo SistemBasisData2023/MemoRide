@@ -1,0 +1,37 @@
+.details {
+  margin-bottom: 3rem;
+}
+
+.details h1 {
+  font-size: 50px;
+}
+
+.details h5 {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.details h5 span {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-right: 1rem;
+  min-width: 100px;
+}
+
+.details h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.button-list {
+  margin: 1rem;
+}
+
+.button-gap {
+  margin-bottom: 1rem;
+}
+
+.button-gap button {
+  margin-right: 1rem;
+}

@@ -12,15 +12,18 @@ const Tours = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
 
-  const { data: tours, loading, error } = useFetch(`${BASE_URL}/tours?page=${page}`);
+  const {
+    data: tours,
+    loading,
+    error,
+  } = useFetch(`${BASE_URL}/tours?page=${page}`);
   const { data: tourCount } = useFetch(`${BASE_URL}/tours/search/getTourCount`);
 
   useEffect(() => {
     const pages = Math.ceil(tourCount / 8); //cards per page
     setPageCount(pages);
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, [page, tourCount, tours]);
-
 
   return (
     <>
@@ -29,18 +32,20 @@ const Tours = () => {
         <Container>
           <Row className="justify-content-center">
             <Col lg="8">
-              <SearchBar className="searchTour" />
+              <div className="text-center">
+                <SearchBar className="searchTour" />
+              </div>
             </Col>
           </Row>
         </Container>
       </section>
       <section className="pt-0">
         <Container>
-        {loading ? (
-        <h4 className="text-center pt-5">Loading...</h4>
-        ) : error ? (
-        <h4 className="text-center pt-5">{error}</h4>
-        ) : null}
+          {loading ? (
+            <h4 className="text-center pt-5">Loading...</h4>
+          ) : error ? (
+            <h4 className="text-center pt-5">{error}</h4>
+          ) : null}
 
           {!loading && !error && tours.length === 0 && (
             <h4 className="text-center pt-5">No tours found</h4>
@@ -49,24 +54,24 @@ const Tours = () => {
             <>
               <Row>
                 {tours?.map((tour) => (
-                  <Col lg="3" md='6' sm='6' className="mb-4" key={tour.id}>
+                  <Col lg="3" md="6" sm="6" className="mb-4" key={tour.id}>
                     <TourCard tour={tour} />
                   </Col>
                 ))}
               </Row>
               <Row>
                 <Col lg="12">
-                    <div className="pagination d-flex aligns-items-center justify-content-center mt-4 gap-3">
+                  <div className="pagination d-flex aligns-items-center justify-content-center mt-4 gap-3">
                     {[...Array(pageCount).keys()].map((number) => (
-                        <span
+                      <span
                         key={number}
                         onClick={() => setPage(number)}
                         className={page === number ? "active_page" : ""}
-                        >
+                      >
                         {number + 1}
-                        </span>
+                      </span>
                     ))}
-                    </div>
+                  </div>
                 </Col>
               </Row>
             </>

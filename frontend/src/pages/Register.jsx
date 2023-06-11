@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, FormGroup, Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../context/AuthController";
 import registerImg from "../assets/images/register.svg";
-import "../styles/login.css"
+import "../styles/login.css";
 import { AuthContext } from "../context/AuthContext";
 
 const Register = () => {
@@ -11,6 +11,7 @@ const Register = () => {
     username: "",
     email: "",
     password: "",
+    role: "user", // Default role is 'user'
   });
 
   const { setUser } = useContext(AuthContext);
@@ -35,6 +36,7 @@ const Register = () => {
       navigate("/login");
     } catch (error) {
       // Handle registration failure
+      alert("Please fill all required fields!");
       console.error("Registration failed:", error.message);
     }
   };
@@ -80,10 +82,17 @@ const Register = () => {
                       onChange={handleChange}
                     />
                   </FormGroup>
-                  <Button
-                    className="auth_btn btn secondary_btn"
-                    type="submit"
-                  >
+                  <FormGroup className="role_form">
+                    <select
+                      id="role"
+                      value={credentials.role}
+                      onChange={handleChange}
+                    >
+                      <option value="user">User</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </FormGroup>
+                  <Button className="auth_btn btn secondary_btn" type="submit">
                     Sign Up
                   </Button>
                 </Form>

@@ -1,13 +1,13 @@
-import React from 'react';
-import './faded.css';
+import React from "react";
+import "./faded.css";
 
 function Faded(props) {
   const [isVisible, setVisible] = React.useState(true);
   const domRef = React.useRef();
 
   React.useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setVisible(true);
         } else {
@@ -28,7 +28,10 @@ function Faded(props) {
   }, []);
 
   return (
-    <div className={`fade-in-section ${isVisible ? 'is-visible' : ''}`} ref={domRef}>
+    <div
+      className={`fade-in-section ${isVisible ? "is-visible" : ""}`}
+      ref={domRef}
+    >
       {props.children}
     </div>
   );

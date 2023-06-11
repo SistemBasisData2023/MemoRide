@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-import { pool } from '../index.js';
+import jwt from "jsonwebtoken";
+import { pool } from "../index.js";
 
 export const verifyToken = (req, res, next) => {
   const token = req.cookies.accessToken;
@@ -16,7 +16,7 @@ export const verifyToken = (req, res, next) => {
     if (err) {
       return res.status(401).json({
         success: false,
-        message: 'Token is invalid!',
+        message: "Token is invalid!",
       });
     }
 
@@ -29,7 +29,7 @@ export const verifyUser = (req, res, next) => {
   verifyToken(req, res, () => {
     const { id } = req.user;
 
-    const query = 'SELECT role FROM users WHERE id = $1';
+    const query = "SELECT role FROM users WHERE id = $1";
     const values = [id];
 
     pool.query(query, values, (err, result) => {
@@ -37,25 +37,25 @@ export const verifyUser = (req, res, next) => {
         console.error(err);
         return res.status(500).json({
           success: false,
-          message: 'Failed to verify user',
+          message: "Failed to verify user",
         });
       }
 
       if (result.rows.length > 0) {
         const role = result.rows[0].role;
 
-        if (role === 'admin') {
+        if (role === "admin") {
           return res.status(404).json({
             success: false,
             message: "You can't add review",
           });
         } else {
-          next()
+          next();
         }
       } else {
         return res.status(404).json({
           success: false,
-          message: 'User not found',
+          message: "User not found",
         });
       }
     });
@@ -66,7 +66,7 @@ export const verifyAdmin = (req, res, next) => {
   verifyToken(req, res, () => {
     const { id } = req.user;
 
-    const query = 'SELECT role FROM users WHERE id = $1';
+    const query = "SELECT role FROM users WHERE id = $1";
     const values = [id];
 
     pool.query(query, values, (err, result) => {
@@ -74,14 +74,14 @@ export const verifyAdmin = (req, res, next) => {
         console.error(err);
         return res.status(500).json({
           success: false,
-          message: 'Failed to verify admin',
+          message: "Failed to verify admin",
         });
       }
 
       if (result.rows.length > 0) {
         const role = result.rows[0].role;
 
-        if (role === 'admin') {
+        if (role === "admin") {
           next();
         } else {
           return res.status(401).json({
@@ -92,7 +92,7 @@ export const verifyAdmin = (req, res, next) => {
       } else {
         return res.status(404).json({
           success: false,
-          message: 'User not found',
+          message: "User not found",
         });
       }
     });

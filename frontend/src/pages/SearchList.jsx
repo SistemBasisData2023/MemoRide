@@ -3,7 +3,7 @@ import CommonSection from "./../shared/CommonSection";
 import { Container, Row, Col } from "reactstrap";
 import { useLocation } from "react-router-dom";
 import TourCard from "../shared/TourCard";
-import Newsletter from "./../shared/Newsletter"
+import Newsletter from "./../shared/Newsletter";
 
 const SearchList = () => {
   const location = useLocation();
@@ -31,7 +31,7 @@ const SearchList = () => {
           </Row>
         </Container>
       </section>
-      <Newsletter/>
+      <Newsletter />
     </>
   );
 };

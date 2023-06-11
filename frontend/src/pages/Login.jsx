@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Container, Row, Col, Form, FormGroup, Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../context/AuthController";
-import '../styles/login.css'
+import "../styles/login.css";
 import loginImg from "../assets/images/login2.svg";
 import { AuthContext } from "../context/AuthContext";
 
@@ -12,8 +12,8 @@ const Login = () => {
     password: undefined,
   });
 
-  const navigate = useNavigate()
-  const { setUser } = useContext(AuthContext)
+  const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -32,6 +32,7 @@ const Login = () => {
       navigate("/home");
     } catch (error) {
       // Handle login failure
+      alert("Check your username or email!");
       console.error("Login failed:", error.message);
     }
   };

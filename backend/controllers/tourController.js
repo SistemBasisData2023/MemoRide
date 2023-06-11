@@ -1,15 +1,35 @@
-import { pool } from '../index.js';
+import { pool } from "../index.js";
 
 // Create new tour
 export const createTour = async (req, res) => {
-  const { title, city, address, distance, photo, description, price, max_group_size, featured } = req.body;
+  const {
+    title,
+    city,
+    address,
+    distance,
+    photo,
+    description,
+    price,
+    max_group_size,
+    featured,
+  } = req.body;
 
   const query = `
     INSERT INTO tours (title, city, address, distance, photo, description, price, max_group_size, featured)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *
   `;
-  const values = [title, city, address, distance, photo, description, price, max_group_size, featured];
+  const values = [
+    title,
+    city,
+    address,
+    distance,
+    photo,
+    description,
+    price,
+    max_group_size,
+    featured,
+  ];
 
   try {
     const result = await pool.query(query, values);
@@ -17,12 +37,14 @@ export const createTour = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'Successfully created',
+      message: "Successfully created",
       data: savedTour,
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ success: false, message: 'Failed to create. Try again' });
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to create. Try again" });
   }
 };
 
@@ -32,7 +54,7 @@ export const updateTour = async (req, res) => {
 
   try {
     const query = {
-      text: 'UPDATE tours SET title = $1, city = $2, address = $3, distance = $4, photo = $5, description = $6, price = $7, max_group_size = $8, featured = $9, updated_at = CURRENT_TIMESTAMP WHERE id = $10 RETURNING *',
+      text: "UPDATE tours SET title = $1, city = $2, address = $3, distance = $4, photo = $5, description = $6, price = $7, max_group_size = $8, featured = $9, updated_at = CURRENT_TIMESTAMP WHERE id = $10 RETURNING *",
       values: [
         req.body.title,
         req.body.city,
@@ -43,7 +65,7 @@ export const updateTour = async (req, res) => {
         req.body.price,
         req.body.max_group_size,
         req.body.featured,
-        id
+        id,
       ],
     };
 
@@ -52,14 +74,14 @@ export const updateTour = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'Successfully updated',
+      message: "Successfully updated",
       data: updatedTour,
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
       success: false,
-      message: 'Failed to update',
+      message: "Failed to update",
     });
   }
 };
@@ -70,7 +92,7 @@ export const deleteTour = async (req, res) => {
 
   try {
     const query = {
-      text: 'DELETE FROM tours WHERE id = $1',
+      text: "DELETE FROM tours WHERE id = $1",
       values: [id],
     };
 
@@ -78,13 +100,13 @@ export const deleteTour = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'Successfully deleted',
+      message: "Successfully deleted",
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
       success: false,
-      message: 'Failed to delete',
+      message: "Failed to delete",
     });
   }
 };
@@ -95,7 +117,7 @@ export const getSingleTour = async (req, res) => {
 
   try {
     const query = {
-      text: 'SELECT * FROM tours WHERE id = $1',
+      text: "SELECT * FROM tours WHERE id = $1",
       values: [id],
     };
 
@@ -104,14 +126,14 @@ export const getSingleTour = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'Successfully get single tour',
+      message: "Successfully get single tour",
       data: tour,
     });
   } catch (err) {
     console.error(err);
     res.status(404).json({
       success: false,
-      message: 'Not Found',
+      message: "Not Found",
     });
   }
 };
@@ -124,7 +146,7 @@ export const getAllTour = async (req, res) => {
 
   try {
     const query = {
-      text: 'SELECT * FROM tours OFFSET $1 LIMIT $2',
+      text: "SELECT * FROM tours OFFSET $1 LIMIT $2",
       values: [offset, limit],
     };
 
@@ -134,14 +156,14 @@ export const getAllTour = async (req, res) => {
     res.status(200).json({
       success: true,
       count: tours.length,
-      message: 'Successfully get all tours',
+      message: "Successfully get all tours",
       data: tours,
     });
   } catch (err) {
     console.error(err);
     res.status(404).json({
       success: false,
-      message: 'Not Found',
+      message: "Not Found",
     });
   }
 };
@@ -152,7 +174,7 @@ export const getTourBySearch = async (req, res) => {
 
   try {
     const query = {
-      text: 'SELECT * FROM tours WHERE city ILIKE $1 AND distance >= $2 AND max_group_size >= $3',
+      text: "SELECT * FROM tours WHERE city ILIKE $1 AND distance >= $2 AND max_group_size >= $3",
       values: [`%${city}%`, distance, maxGroupSize],
     };
 
@@ -161,14 +183,14 @@ export const getTourBySearch = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'Successfully',
+      message: "Successfully",
       data: tours,
     });
   } catch (err) {
     console.error(err);
     res.status(404).json({
       success: false,
-      message: 'Not Found',
+      message: "Not Found",
     });
   }
 };
@@ -177,7 +199,7 @@ export const getTourBySearch = async (req, res) => {
 export const getFeaturedTours = async (req, res) => {
   try {
     const query = {
-      text: 'SELECT * FROM tours WHERE featured = true LIMIT 8',
+      text: "SELECT * FROM tours WHERE featured = true LIMIT 8",
     };
 
     const result = await pool.query(query);
@@ -186,20 +208,20 @@ export const getFeaturedTours = async (req, res) => {
     if (tours.length === 0) {
       return res.status(404).json({
         success: false,
-        message: 'No featured tours found',
+        message: "No featured tours found",
       });
     }
 
     res.status(200).json({
       success: true,
-      message: 'Successfully retrieved featured tours',
+      message: "Successfully retrieved featured tours",
       data: tours,
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
       success: false,
-      message: 'Failed to retrieve featured tours',
+      message: "Failed to retrieve featured tours",
     });
   }
 };
@@ -208,7 +230,7 @@ export const getFeaturedTours = async (req, res) => {
 export const getTourCount = async (req, res) => {
   try {
     const query = {
-      text: 'SELECT COUNT(*) FROM tours',
+      text: "SELECT COUNT(*) FROM tours",
     };
 
     const result = await pool.query(query);
@@ -217,7 +239,7 @@ export const getTourCount = async (req, res) => {
     res.status(200).json({ success: true, data: tourCount });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ success: false, message: 'Failed to fetch' });
+    res.status(500).json({ success: false, message: "Failed to fetch" });
   }
 };
 

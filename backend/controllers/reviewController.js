@@ -1,4 +1,4 @@
-import { pool } from '../index.js';
+import { pool } from "../index.js";
 
 export const createReview = async (req, res) => {
   const tourId = req.params.tourId;
@@ -6,7 +6,7 @@ export const createReview = async (req, res) => {
 
   try {
     const query = {
-      text: 'INSERT INTO reviews (product_id, username, review_text, rating) VALUES ($1, $2, $3, $4) RETURNING *',
+      text: "INSERT INTO reviews (product_id, username, review_text, rating) VALUES ($1, $2, $3, $4) RETURNING *",
       values: [tourId, username, reviewText, rating],
     };
 
@@ -15,14 +15,14 @@ export const createReview = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'Review submitted',
+      message: "Review submitted",
       data: savedReview,
     });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(500).json({
       success: false,
-      message: 'Failed to submit',
+      message: "Failed to submit",
     });
   }
 };
@@ -32,7 +32,7 @@ export const getAllReviews = async (req, res) => {
 
   try {
     const query = {
-      text: 'SELECT * FROM reviews WHERE product_id = $1',
+      text: "SELECT * FROM reviews WHERE product_id = $1",
       values: [tourId],
     };
 
@@ -41,14 +41,14 @@ export const getAllReviews = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'Reviews fetched',
+      message: "Reviews fetched",
       data: reviews,
     });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(500).json({
       success: false,
-      message: 'Failed to fetch reviews',
+      message: "Failed to fetch reviews",
     });
   }
 };
@@ -58,7 +58,7 @@ export const getUserReviews = async (req, res) => {
 
   try {
     const query = {
-      text: 'SELECT * FROM reviews WHERE user_id = $1',
+      text: "SELECT * FROM reviews WHERE user_id = $1",
       values: [userId],
     };
 
@@ -67,15 +67,14 @@ export const getUserReviews = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'User reviews fetched',
+      message: "User reviews fetched",
       data: reviews,
     });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(500).json({
       success: false,
-      message: 'Failed to fetch user reviews',
+      message: "Failed to fetch user reviews",
     });
   }
 };
-

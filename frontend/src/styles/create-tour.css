@@ -1,0 +1,34 @@
+.create_tour {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(229, 231, 235);
+  justify-content: center;
+}
+
+.create_form input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: var(--heading-color);
+  font-size: 1rem;
+  border: none;
+  border-bottom: 1px solid rgb(229, 231, 235);
+}
+
+.create_form input:focus {
+  outline: none;
+}
+
+.create_info-form {
+  padding: 1.5rem;
+  border: 1px solid rgb(229, 231, 235);
+}
+
+.create_info-form label {
+  color: var(--text-color);
+}
+
+.create_btn {
+  width: 30%;
+  padding: 0.2rem;
+}

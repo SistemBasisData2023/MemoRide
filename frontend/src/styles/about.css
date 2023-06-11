@@ -3,21 +3,8 @@
   align-items: center;
 }
 
-.about-circle {
-  width: 150px;
+.about-container img {
   height: 150px;
-  border-radius: 50%;
-  background-color: #fa7436;
-  animation: spin 4s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotateX(0deg) rotateY(0deg);
-  }
-  100% {
-    transform: rotateX(360deg) rotateY(360deg);
-  }
 }
 
 .about-content {
@@ -31,6 +18,33 @@
 }
 
 .about-content p {
-  color: var(--text-color);
+  color: var(--heading-color);
   font-size: 1.1rem;
+}
+
+.job-content {
+  text-align: right;
+}
+
+.job-content h2 {
+  font-size: 2rem;
+  color: var(--heading-color);
+  margin-bottom: 1rem;
+}
+
+.job-content p {
+  color: var(--heading-color);
+  font-size: 1.1rem;
+}
+
+.github-content {
+  margin-top: 2rem;
+}
+
+.icon-link {
+  text-decoration: none;
+  color: var(--heading-color);
+  font-size: 5rem;
+  justify-content: center;
+  align-items: center;
 }

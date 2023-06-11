@@ -28,6 +28,9 @@ const nav_links = [
 const Header = () => {
   const headerRef = useRef(null);
   const { user, handleLogout } = useContext(AuthContext);
+  const userId = user ? user.id : null;
+  const username = user ? user.username : null;
+  const role = user ? user.role : null;
   console.log(user);
 
   const stickyHeaderFunc = () => {
@@ -72,7 +75,9 @@ const Header = () => {
                 <li className="nav_item" key={index}>
                   <NavLink
                     to={item.path}
-                    className={({ isActive }) => (isActive ? "active_link" : "")}
+                    className={({ isActive }) =>
+                      isActive ? "active_link" : ""
+                    }
                   >
                     {item.display}
                   </NavLink>
@@ -86,13 +91,32 @@ const Header = () => {
             {user !== null ? (
               <div className="nav_btn d-flex align-items-center gap-4">
                 <div className="user_show">
-                  <i className="ri-user-smile-fill"></i>
+                  {role === "admin" ? (
+                    <Link to="/admin-profile" className="link">
+                      <i className="ri-user-smile-fill"></i>
+                    </Link>
+                  ) : (
+                    <Link to={`/user-profile/${userId}`} className="link">
+                      <i className="ri-user-smile-fill"></i>
+                    </Link>
+                  )}
                 </div>
+
                 <div className="username_show">
-                  <h5>{user.username}</h5>
+                  {role === "admin" ? (
+                    <Link to="/admin-profile" className="link">
+                      <h5>{"Admin " + username}</h5>
+                    </Link>
+                  ) : (
+                    <Link to={`/user-profile/${userId}`} className="link">
+                      <h5>{username}</h5>
+                    </Link>
+                  )}
                 </div>
                 <Button className="btn btn-dark" onClick={handleLogout}>
-                  Logout
+                  <Link to={`/home`} className="link">
+                    Log Out
+                  </Link>
                 </Button>
               </div>
             ) : (
@@ -105,7 +129,6 @@ const Header = () => {
                 </Button>
               </div>
             )}
-
           </div>
         </div>
       </Row>

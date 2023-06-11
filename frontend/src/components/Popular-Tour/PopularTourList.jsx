@@ -6,9 +6,10 @@ import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
 
 const PopularTourList = () => {
-  const { data: featuredTours, error, loading } = useFetch(
-    `${BASE_URL}/tours/search/getFeaturedTours`
-  );
+  const {
+    data: featuredTours,
+    error,
+  } = useFetch(`${BASE_URL}/tours/search/getFeaturedTours`);
 
   useEffect(() => {
     if (error) {
@@ -27,7 +28,7 @@ const PopularTourList = () => {
   return (
     <>
       {featuredTours?.map((tour) => (
-        <Col lg="3" md='4' sm='6' className="mb-4" key={tour.id}>
+        <Col lg="3" md="4" sm="6" className="mb-4" key={tour.id}>
           <TourCard tour={tour} />
         </Col>
       ))}

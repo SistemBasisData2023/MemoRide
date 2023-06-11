@@ -13,7 +13,7 @@ export const register = async (req, res) => {
         message: "Password is required",
       });
     }
-    
+
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
@@ -22,7 +22,7 @@ export const register = async (req, res) => {
       email: email,
       password: hash,
       photo: photo,
-      role: 'user',
+      role: role, // Use the provided role from the request body
     };
 
     const query = {
@@ -38,9 +38,10 @@ export const register = async (req, res) => {
 
     await pool.query(query);
 
-    res
-      .status(200)
-      .json({ success: true, message: "Successfully created an account" });
+    res.status(200).json({
+      success: true,
+      message: "Successfully created an account",
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({
@@ -52,7 +53,6 @@ export const register = async (req, res) => {
 
 // login user
 export const login = async (req, res) => {
-
   const email = req.body.email;
   const password = req.body.password;
 

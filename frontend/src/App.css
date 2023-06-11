@@ -43,7 +43,7 @@ h6 {
   color: var(--heading-color);
 }
 
-a { 
+a {
   text-decoration: none;
   color: unset;
 }
@@ -65,7 +65,7 @@ ul {
 }
 
 .primary_btn a:hover {
-color: inherit;
+  color: inherit;
 }
 
 .secondary_btn {
@@ -99,16 +99,19 @@ color: inherit;
   font-style: italic;
 }
 
-@media screen and (max-width: 992px){
-  .primary_btn a, .secondary_btn a{
+@media screen and (max-width: 992px) {
+  .primary_btn a,
+  .secondary_btn a {
     font-size: 0.9rem;
   }
 
-  .primary_btn, .secondary_btn, .btn-dark{
+  .primary_btn,
+  .secondary_btn,
+  .btn-dark {
     padding: 0.2rem 1.1rem !important;
   }
 
-  section{
+  section {
     padding: 40px 0;
   }
 }

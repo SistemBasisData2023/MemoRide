@@ -26,7 +26,7 @@ const Booking = ({ tour, avgRating }) => {
     const { id, value } = e.target;
     const updatedBooking = { ...booking, [id]: value };
     setBooking(updatedBooking);
-  };  
+  };
 
   const serviceFee = 10;
   const totalAmount =
@@ -36,31 +36,31 @@ const Booking = ({ tour, avgRating }) => {
   const handleClick = async (e) => {
     e.preventDefault();
 
-    console.log(booking)
+    console.log(booking);
 
     try {
-        if(!user || user === undefined || user === null){
-            return alert('Please log in to book our tours.')
-        }
+      if (!user || user === undefined || user === null) {
+        return alert("Please log in to book our tours.");
+      }
 
-        const res = await fetch(`${BASE_URL}/booking`, {
-            method: 'post',
-            headers: {
-                'content-type': 'application/json'
-            },
-            credentials: 'include',
-            body: JSON.stringify(booking)
-        })
+      const res = await fetch(`${BASE_URL}/booking`, {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(booking),
+      });
 
-        const result = await res.json()
+      const result = await res.json();
 
-        if(!res.ok) {
-            return alert(result.message)
-        }
+      if (!res.ok) {
+        return alert(result.message);
+      }
 
-        navigate("/thank-you");
+      navigate("/thank-you");
     } catch (err) {
-        alert(err.message)
+      alert(err.message);
     }
   };
 

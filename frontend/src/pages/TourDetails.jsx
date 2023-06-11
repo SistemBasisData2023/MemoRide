@@ -3,7 +3,6 @@ import "../styles/detail-tour.css";
 import { Container, Row, Col, Form, ListGroup } from "reactstrap";
 import { useParams } from "react-router-dom";
 import calculateAvgRating from "../utils/avgRating";
-import avatar from "../assets/images/ava1.png";
 import Booking from "../components/Booking/Booking";
 import Newsletter from "../shared/Newsletter";
 import axios from "axios";
@@ -16,9 +15,10 @@ import Cookies from "js-cookie";
 const TourDetails = () => {
   const { id } = useParams();
   const reviewMsgRef = useRef("");
-  const [tourRating, setTourRating] = useState(null);
+  const [tourRating, setTourRating] = useState(0);
+  const [selectedRatings, setSelectedRatings] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   //fetch data from database
   const { data: tour, loading, error } = useFetch(`${BASE_URL}/tours/${id}`);
@@ -55,23 +55,24 @@ const TourDetails = () => {
 
     try {
       const token = getToken(); // Retrieve the token from localStorage
-      console.log(token)
+      console.log(token);
 
-      const response = await axios.post(`${BASE_URL}/reviews/${id}`,
+      const response = await axios.post(
+        `${BASE_URL}/reviews/${id}`,
         {
           reviewText,
           rating: tourRating,
           username: user.username,
-          role: 'user',
+          role: "user",
         },
         {
           withCredentials: true, // Include this option to send cookies
           headers: {
-            Authorization: `Bearer ${Cookies.get('accessToken')}`, // Include the token in the Authorization header
+            Authorization: `Bearer ${Cookies.get("accessToken")}`, // Include the token in the Authorization header
           },
         }
       );
-  
+
       if (response.status === 200) {
         const data = response.data;
         setReviews([...reviews, data.data]);
@@ -105,6 +106,14 @@ const TourDetails = () => {
     fetchReviews();
   }, [id]);
 
+  const handleRatingClick = (rating) => {
+    if (selectedRatings.includes(rating)) {
+      setSelectedRatings(selectedRatings.filter((r) => r !== rating));
+    } else {
+      setSelectedRatings([...selectedRatings, rating]);
+    }
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [tour]);
@@ -115,11 +124,11 @@ const TourDetails = () => {
         <Container>
           {loading && <h4 className="text-center pt-5">Loading...</h4>}
           {error && <h4 className="text-center pt-5">{error}</h4>}
-          {!loading && !error && 
+          {!loading && !error && (
             <Row>
               <Col lg="8">
                 <div className="tour_content">
-                  <img src="https://picsum.photos/id/29/200/300" alt="" />
+                  <img src="https://picsum.photos/300/200" alt="" />
                   <div className="tour_info">
                     <h2>{title}</h2>
                     <div className="d-flex align-items-center gap-5">
@@ -167,21 +176,17 @@ const TourDetails = () => {
 
                     <Form onSubmit={submitHandler}>
                       <div className="rating_group d-flex align-items-center gap-3 mb-4">
-                        <span onClick={() => setTourRating(1)}>
-                          1 <i className="ri-star-s-fill"></i>
-                        </span>
-                        <span onClick={() => setTourRating(2)}>
-                          2 <i className="ri-star-s-fill"></i>
-                        </span>
-                        <span onClick={() => setTourRating(3)}>
-                          3 <i className="ri-star-s-fill"></i>
-                        </span>
-                        <span onClick={() => setTourRating(4)}>
-                          4 <i className="ri-star-s-fill"></i>
-                        </span>
-                        <span onClick={() => setTourRating(5)}>
-                          5 <i className="ri-star-s-fill"></i>
-                        </span>
+                        {[1, 2, 3, 4, 5].map((rating) => (
+                          <span
+                            key={rating}
+                            className={`${
+                              selectedRatings.includes(rating) ? "clicked" : ""
+                            }`}
+                            onClick={() => handleRatingClick(rating)}
+                          >
+                            {rating} <i className="ri-star-s-fill"></i>
+                          </span>
+                        ))}
                       </div>
                       <div className="review_input">
                         <input
@@ -190,7 +195,10 @@ const TourDetails = () => {
                           placeholder="Write a review"
                           required
                         />
-                        <button className="btn primary_btn text-white" type="submit">
+                        <button
+                          className="btn primary_btn text-white"
+                          type="submit"
+                        >
                           Submit
                         </button>
                       </div>
@@ -199,20 +207,20 @@ const TourDetails = () => {
                     <ListGroup className="user_reviews">
                       {reviews?.map((review) => (
                         <div className="review_item">
-                          <img src={avatar} alt="" />
+                          <img src="https://i.pravatar.cc/300" alt="" />
                           <div className="w-100">
                             <div className="d-flex align-items-center justify-content-between">
                               <div>
                                 <h5>{review.username}</h5>
                                 <p>
-                                  {new Date(review.created_at).toLocaleDateString(
-                                    "en-US",
-                                    options
-                                  )}
+                                  {new Date(
+                                    review.created_at
+                                  ).toLocaleDateString("en-US", options)}
                                 </p>
                               </div>
                               <span className="d-flex align-items-center">
-                                {review.rating}<i className="ri-star-s-fill"></i>
+                                {review.rating}
+                                <i className="ri-star-s-fill"></i>
                               </span>
                             </div>
 
@@ -229,7 +237,7 @@ const TourDetails = () => {
                 <Booking tour={tour} avgRating={avgRating} />
               </Col>
             </Row>
-          }
+          )}
         </Container>
       </section>
       <Newsletter />

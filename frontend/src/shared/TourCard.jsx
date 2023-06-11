@@ -31,11 +31,17 @@ const TourCard = ({ tour }) => {
   const { totalRating, avgRating } = calculateAvgRating(reviews);
   const ratingText = avgRating === 0 ? "Not rated" : avgRating.toFixed(1);
 
+  const randomImageURL = `https://picsum.photos/300/200?random=${Math.random()}`;
+
   return (
     <div className="tour_card">
       <Card>
         <div className="tour_img">
-          <img className="tour_img__image" src="https://picsum.photos/id/29/200/300" alt="tour-img" />
+          <img
+            className="tour_img__image"
+            src={randomImageURL}
+            alt="tour-img"
+          />
           {featured && <span>Featured</span>}
         </div>
 
@@ -45,8 +51,7 @@ const TourCard = ({ tour }) => {
               <i className="ri-map-pin-line"></i> {city}
             </span>
             <span className="tour_rating d-flex align-items-center gap-1">
-              <i className="ri-star-line"></i>{" "}
-              {ratingText}
+              <i className="ri-star-line"></i> {ratingText}
               {reviews.length === 0 ? null : <span>({reviews.length})</span>}
             </span>
           </div>
