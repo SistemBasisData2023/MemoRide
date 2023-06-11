@@ -1,87 +1,144 @@
 # MemoRide-SBD
 
-<p align="center">
-  <i align="center">A Cultural Journey</i>
-</p>
-
 <p align ="center">
   <a href="#authors">Authors</a> •
   <a href="#introduction">Introduction</a> •
-  <a href="#how-to-use">How To Use</a> •
   <a href="#language-and-tools">Language and Tools</a> •
   <a href="#tables">Tables</a> •
   <a href="#flowchart">Flowchart</a> •
-  <a href="#relational-table-and-uml">Relational Table and UML</a> 
+  <a href="#ERD-and-UML">ERD and UML</a> 
 </p>
+
+---
 
 ## Authors
 
-- [@birujung](https://www.github.com/birujung) - 
-- [@akmalrbn](https://www.github.com/akmalrbn) - 2106731610
-- [@sulsyd](https://www.github.com/sulsyd) - 
-
+- [Amrita Deviayu Tunjungbiru](https://www.github.com/birujung) - 2106636584
+- [Akmal Rabbani](https://www.github.com/akmalrbn) - 2106731610
+- [Sulthan Satrya Yudha Darmawan](https://www.github.com/sulsyd) - 2106731560
+---
 
 ## Introduction
-<p align="justify">MemoRide merupakan sebuah aplikasi berbasis web yang dirancang untuk memudahkan pengguna dalam melakukan *booking* destinasi wisata kultural. Dengan menggunakan halaman utama aplikasi ini, pengguna dapat dengan mudah memilih dan mencari destinasi wisata kultural di Indonesia sesuai dengan preferensi mereka. Ketika pengguna telah memilih salah satu destinasi wisata, mereka akan dapat melihat rating yang diberikan oleh pengguna lain. Aplikasi ini juga menyediakan fitur riwayat booking dan riwayat wisata bagi pengguna, sehingga pengguna dapat melacak perjalanan mereka sebelumnya.</p>
+<p align="justify">MemoRide is a web-based application designed to facilitate users in booking cultural tourist destinations. Through its homepage, users can easily select and search for cultural tourist destinations in Indonesia based on their preferences. Once users have chosen a destination, they can view ratings given by other users. The application also provides features for users to track their booking history and travel history, allowing them to keep a record of their previous trips.</p>
 
-<p align="justify">Selain itu, pengguna akan memiliki tingkatan member yang berbeda tergantung dari seberapa sering mereka melakukan perjalanan. Dalam aplikasi ini juga terdapat pengguna dengan peran admin, yang memiliki kemampuan untuk melakukan operasi CRUD (Create, Read, Update, Delete) pada destinasi wisata yang tersedia. Dengan adanya fitur ini, admin dapat dengan mudah mengelola informasi dan detail destinasi wisata.</p>
+<p align="justify">Additionally, the application also includes users with admin roles, who have the ability to perform CRUD operations (Create, Read, Update, Delete) on the available tourist destinations. With this feature, admins can easily manage information and details of the tourist destinations and the users.</p>
 
-<p align="justify">Dengan demikian, MemoRide hadir sebagai sebuah aplikasi web yang membantu pengguna dalam melakukan pemesanan destinasi wisata kultural di Indonesia. Aplikasi ini tidak hanya memberikan informasi dan rating yang berguna, tetapi juga menyediakan fitur riwayat dan tingkatan member, serta memberikan kontrol penuh kepada admin untuk mengelola destinasi wisata.</p>
+<p align="justify">Key features of MemoRide:</p>
+🏛️ Extensive selection of cultural tourist destinations
+🌟 Ratings and reviews from fellow travelers
+📝 Booking history and travel tracking
+📋 Admin privileges for managing destinations and users
+---
+
+## Language and Tools
+<p align="justify">MemoRide is developed using the latest technologies and tools, ensuring a seamless user experience. Here's a glimpse of the language and tools we've used:</p>
+
+### ```Backend```
+1. [```Node.js```](https://nodejs.org/)
+2. [```PostgreSQL```](https://www.postgresql.org/)
+3. [```Postman```](https://www.postman.com/)
+4. [```NeonDB```](https://neon.tech/)
+
+### ```Frontend```
+1. [```JavaScript```](https://www.javascript.com/)
+2. [```CSS```](https://www.w3.org/Style/CSS/Overview.en.html)
+3. [```React```](https://react.dev/)
+ 
+ 
+---
 
 ## Tables
+<p align="justify">MemoRide utilizes several tables to store crucial data. Here are the key tables we use:</p>
 
-### 1.  ```Wisata```
-[ desc ]
+### 1.  ```Tour```
+
+<p align="justify">The ```Tour``` table stores information about various cultural tourist destinations. These details are displayed on the ```Tours Page``` for users to browse and explore. Admins can use this table to manage tour information, including creating, editing, and deleting tours. The table includes the following data:</p>
+
 ```
-1. Nama
-2. Lokasi (Jalan)
-3. Lokasi (Provinsi)
-4. Jarak
-5. Deskripsi
-6. Review
-7. Biaya per orang
-8. Maksimal orang per wisata
+1. id
+2. title
+3. city
+4. address
+5. distance
+6. photo
+7. description
+8. price
+9. max_group_size
+10. featured
 
 ```
 
 ### 2.  ```Review```
-[ desc ]
+
+<p align="justify">The ```Review``` table stores user reviews for specific cultural tourist destinations. These reviews are displayed on the ```Tours Detail Page```, allowing users to gain insights from fellow travelers. The table includes the following data:</p>
+
 ```
-1. wisata_Id
-2. Username
-3. Text Review
-4. Rating
+1. id
+2. product_Id
+3. username
+4. review_text
+5. rating
 
 ```
 
 ### 3.  ```User```
-[ desc ]
-```
-1. Account_ID
-2. Email
-3. Password
-4. Role
 
+<p align="justify">The ```User``` table stores user registration data, including account credentials and roles. It is used for user authentication during login and for assigning user roles as either ```User``` or ```Admin```. The table includes the following data:</p>
+
+```
+1. id
+2. username
+3. email
+4. password
+5. photo
+6. role
 ```
 
 ### 4.  ```Booking```
-[ desc ]
-```
-1. user_Id
-2. Username
-3. Nama Lengkap
-4. Jumlah orang
-5. Nomor Telepon
-6. Booking Date
-7. Nama Wisata
-8. Total_Price
+
+<p align="justify">The ```Booking``` table stores information about user bookings, including preferences and contact details. This table helps users keep track of their current bookings and serves as a record of their previous trips. The table includes the following data:</p>
 
 ```
+1. id
+2. user_id
+3. user_email
+4. tour_name
+5. full_name
+6. group_size
+7. phone
+8. book_at
 
-
-## How To Use
-
+```
+---
 
 ## Flowchart
+<details>
+  <summary>View User and Admin Flowchart:</summary>
 
-## Relational Table and UML 
+  ```MemoRide User Flowchart ```
+
+![alt text](https://github.com/birujung/MemoRide-SBD/blob/tunjung/User_Flowchart.png)
+
+```Memoride Admin Flowchart```
+
+![alt text](https://github.com/birujung/MemoRide-SBD/blob/tunjung/Admin_Flowchart.png)
+
+</details>
+
+---
+
+## ERD and UML 
+<details>
+  <summary>View ERD and UML</summary>
+
+  ```Entity Relational Diagram (ERD)```
+
+![alt text](https://github.com/birujung/MemoRide-SBD/blob/tunjung/ERD_MemoRide.png)
+
+```Unified Modeling Language (UML)```
+
+![alt text](https://github.com/birujung/MemoRide-SBD/blob/tunjung/UML_MemoRide.png)
+
+</details>
+
+---
